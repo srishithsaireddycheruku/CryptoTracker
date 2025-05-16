@@ -1,19 +1,81 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { fetchCoinData } from "../../Services/fetchCoinData";
+import { useQuery } from "@tanstack/react-query";
 
-function CoinTable(){
+function CoinTable() {
+    const [page, setPage] = useState(1);
 
-    // async function download(){
-    //     const response = await fetch('https://api.coingecko.com/api/v3/ping');
-    //     const data = await response.json();
-    //     console.log(data);
-    // }
+    const { data: rawData, isLoading, isError, error } = useQuery({ 
+        queryKey: ['coins', page], 
+        queryFn: () => fetchCoinData(page, 'usd') 
+    });
 
+    useEffect(() => {
+        console.log("Raw Data:", rawData); // Debugging API response
+    }, [rawData]);
 
-    // useEffect(()=>{
-    //     download();
-    // }, []);  //ass dependent array is empty..this call will run once only on mounting
-    return(
-        <> CoinTable</>
+    const data = Array.isArray(rawData) ? rawData : [];
+    
+    if (isLoading) {
+        return <div>Loading....</div>;
+    }
+
+    if (isError) {
+        return <div>Error: {error.message}</div>;
+    }
+
+    return (
+        <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
+            <div className="w-full bg-yellow-400 text-black flex py-4 px-2 font-semibold items-center justify-center">
+                {/* Header of the table */}
+                <div className="basis-[35%]">Coin</div>
+                <div className="basis-[25%]">Price</div>
+                <div className="basis-[20%]">24hr Change Value</div>
+                <div className="basis-[20%]">Market Cap</div>
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+                {data.length > 0 ? (
+                    data.map((coin) => (
+                        <div key={coin.id} className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between">
+                            <div className="flex items-center justify-start gap-3 basis-[35%]">
+                                <div className="w-[5rem] h-[5rem]">
+                                    <img src={coin.image} className="w-full h-full" alt={coin.name} />
+                                </div>
+                                <div className="flex flex-col">
+                                    <div className="text-3xl">{coin.name}</div>
+                                    <div className="text-sm text-gray-400">{coin.symbol}</div>
+                                </div>
+                            </div>
+                            <div className="basis-[25%]">${coin.current_price}</div>
+                            <div className="basis-[20%]">{coin.price_change_24h} %</div>
+                            <div className="basis-[20%]">${coin.market_cap}</div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-white text-lg">No data available. Try refreshing.</div>
+                )}
+            </div>
+
+            <div className="flex gap-4 mt-4">
+                <button
+                    className="bg-yellow-400 text-black px-4 py-2 rounded disabled:opacity-50"
+                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={page === 1}
+                >
+                    Prev
+                </button>
+                <span className="text-white font-semibold">Page {page}</span>
+                <button
+                    className="bg-yellow-400 text-black px-4 py-2 rounded"
+                    onClick={() => setPage((prev) => prev + 1)}
+                    disabled={data.length === 0}
+                >
+                    Next
+                </button>
+            </div>
+        </div>
     );
 }
+
 export default CoinTable;
