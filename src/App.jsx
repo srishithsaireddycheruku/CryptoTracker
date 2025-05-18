@@ -4,14 +4,14 @@ import Banner from './Components/Banner/Banner.jsx';
 import CoinTable from './Components/CoinTable/CoinTable.jsx'
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Home from './pages/Home.jsx';
-import { CurrencyContext } from './CurrencyContext/CurrencyContext.jsx';
+// import { CurrencyContext } from './CurrencyContext/CurrencyContext.jsx';
 function App() {
-  const [currency,setCurrency]=useState('usd');
+  // const [currency,setCurrency]=useState('usd');
   return (
     <>
-      <CurrencyContext.Provider value={{currency,setCurrency}}>
+      {/* <CurrencyContext.Provider value={{currency,setCurrency}}> */}
         <Home />
-      </CurrencyContext.Provider>
+      {/* </CurrencyContext.Provider> */}
     </>
   );
 }
