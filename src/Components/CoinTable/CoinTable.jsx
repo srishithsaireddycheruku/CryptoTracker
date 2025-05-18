@@ -3,6 +3,7 @@ import { fetchCoinData } from "../../Services/fetchCoinData";
 import { useQuery } from "@tanstack/react-query";
 import { CurrencyContext } from "../../CurrencyContext/CurrencyContext";
 import store from "../../zustandStore/zustandStore.jsx";
+import { useNavigate } from "react-router-dom";
 function CoinTable() {
 
     const {currency} = store();
@@ -13,6 +14,8 @@ function CoinTable() {
         queryKey: ['coins', page,currency], 
         queryFn: () => fetchCoinData(page, currency) 
     });
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("Raw Data:", rawData); // Debugging API response
@@ -41,7 +44,7 @@ function CoinTable() {
             <div className="w-full flex flex-col gap-2">
                 {data.length > 0 ? (
                     data.map((coin) => (
-                        <div key={coin.id} className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between">
+                        <div onClick={() => navigate(`/details/${coin.id}`)} key={coin.id} className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between cursor-pointer">
                             <div className="flex items-center justify-start gap-3 basis-[35%]">
                                 <div className="w-[5rem] h-[5rem]">
                                     <img src={coin.image} className="w-full h-full" alt={coin.name} />
