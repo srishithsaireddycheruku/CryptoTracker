@@ -13,6 +13,7 @@ function Routing() {
 
             <Route path='/details/:coinId' element={<CoinDetailsPage />} />
 
+            
         </Route>
         
 
