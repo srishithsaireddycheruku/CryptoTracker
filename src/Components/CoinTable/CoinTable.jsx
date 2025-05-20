@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CurrencyContext } from "../../CurrencyContext/CurrencyContext";
 import store from "../../zustandStore/zustandStore.jsx";
 import { useNavigate } from "react-router-dom";
+import { Facebook } from "react-content-loader";
 function CoinTable() {
 
     const {currency} = store();
@@ -24,7 +25,7 @@ function CoinTable() {
     const data = Array.isArray(rawData) ? rawData : [];
     
     if (isLoading) {
-        return <div>Loading....</div>;
+        return <Facebook />;
     }
 
     if (isError) {

@@ -19,7 +19,7 @@ function CoinDetailsPage() {
     // },[coin]);
 
     if(isLoading){
-        return <div>Loading...</div>
+        return <div>Downloading Coindata...</div>
     }
     if(isError){
         return <div>Error fetching coin details</div>

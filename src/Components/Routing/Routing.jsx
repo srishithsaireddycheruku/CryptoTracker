@@ -1,19 +1,20 @@
-import CoinDetailsPage from "../../pages/CoinDetailsPage";
-import Home from "../../pages/Home";
+import {lazy}  from "react";
 import { Route, Routes } from "react-router-dom";
-
+import { Suspense } from "react";
 import MainLayout from "../../pages/Layout.jsx";
-
+import { Facebook } from "react-content-loader";
+const Home = lazy(() => import("../../pages/Home.jsx"));
+const CoinDetailsPage = lazy(() => import("../../pages/CoinDetailsPage.jsx"));
 function Routing() {
   return (
     <Routes>
         <Route path='/' element={<MainLayout />} >
-            
-            <Route index element={<Home />} />   {/*Here index is nothing but path='/' */}
 
-            <Route path='/details/:coinId' element={<CoinDetailsPage />} />
+            <Route index element={<Suspense fallback={<Facebook />}><Home /></Suspense>} />   {/*Here index is nothing but path='/' */}
 
-            
+            <Route path='/details/:coinId' element={<Suspense fallback={<Facebook />}><CoinDetailsPage /></Suspense>} />
+
+
         </Route>
         
 
