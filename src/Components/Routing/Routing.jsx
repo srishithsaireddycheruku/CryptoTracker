@@ -7,7 +7,7 @@ function Routing(){
         <Routes>
             <Route path="/" element={<Layout />} >
                 <Route index element={<Home />} /> {/* this is the default page and the index means that it has the same as the parent main page */}
-                <Route path="/details/:CoinId" element={<CoinDetails />} />
+                <Route path="/details/:coinId" element={<CoinDetails />} />  {/* the ':' indicates that it is a parameter and is dynamic*/}
             </Route>
         </Routes>   
     )
