@@ -5,7 +5,6 @@ import { CurrencyContext } from "../context/CurrencyContext";
 function Home(){
     return(
         <>
-            <Navbar/>
             <Banner/>
             <CoinTable/>
         </>
