@@ -1,13 +1,16 @@
-import { useEffect,useState } from "react";
+import { useContext, useEffect,useState } from "react";
 import { fetchCoinData } from "../../Services/fetchCoinData";
 import { useQuery } from "@tanstack/react-query";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
 function CoinTable(){
 
+    const { currency } = useContext(CurrencyContext);
+
     const [page,setPage]=useState(1);
     const { data, isLoading, isError, error } = useQuery({
-        queryKey: ['coins', page],
-        queryFn: () => fetchCoinData(page, 'usd'),
+        queryKey: ['coins', page,currency], // to uniquely identify the query and to cache the data based on the page and currency
+        queryFn: () => fetchCoinData(page, currency),
         //retry: 2,  //to retry failed requests again
         //retryDelay: 1000,
         gcTime: 1000 * 60 * 2, // renamed from cacheTime in v5
@@ -24,6 +27,7 @@ function CoinTable(){
         <>
             <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
                 {/*header of the table */}
+                {currency.toUpperCase()} Price Table
                 <div className="w-full bg-yellow-400 text-black flex py-4 px-2 font-semibold items-center">
                     <div className="basis-[35%]">
                         Coin

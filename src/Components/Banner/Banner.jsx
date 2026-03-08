@@ -1,7 +1,7 @@
 import BannerImage from "../../assets/banner.jpg";
 function Banner(){
     return(
-        <div className="w-full h-[35rem] relative">
+        <div className="w-full h-[25rem] relative">
             <img src={BannerImage} 
             alt="Banner"
             className="h-full w-full" />
