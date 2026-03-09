@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchCoinDetails } from "../Services/fetchCoinDetails";
 import parse from "html-react-parser";
 import currencyStore from "../zustandState/store";
+import { Facebook } from "react-content-loader";
 function CoinDetails(){
 
     const { coinId } = useParams();
@@ -17,7 +18,7 @@ function CoinDetails(){
 
     
     if(isLoading){
-        return <div>Loading...</div>
+        return <Facebook />; // Show loading skeleton while fetching data
     }
     if(isError){
         return <div>Error fetching coin details</div>
