@@ -18,7 +18,7 @@ function CoinDetails(){
 
     
     if(isLoading){
-        return <Facebook />; // Show loading skeleton while fetching data
+        return <Facebook /> // Show loading skeleton while fetching data
     }
     if(isError){
         return <div>Error fetching coin details</div>
