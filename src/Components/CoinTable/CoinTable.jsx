@@ -42,7 +42,7 @@ function CoinTable(){
                         Price
                     </div>
                     <div className="basis-[20%]">
-                        24th Change
+                        24hr Change
                     </div>
                     <div className="basis-[20%]">
                         Market Cap
