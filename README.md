@@ -312,9 +312,9 @@ This project demonstrates practical usage of:
 
 **Srishith Sai Reddy Cheruku**
 
-GitHub: https://github.com/your-username
+GitHub: [https://github.com/your-username](https://github.com/srishithsaireddycheruku)
 
-LinkedIn: https://linkedin.com/in/your-profile
+LinkedIn: https://www.linkedin.com/in/srishith-sai-reddy-cheruku-7618b8314/
 
 ---
 
